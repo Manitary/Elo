@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 [tool.setuptools]
-packages = ["elosports"]
+package-dir = { "" = "src" }
 
 [project.urls]
 "Homepage" = "https://github.com/Manitary/Elo"
