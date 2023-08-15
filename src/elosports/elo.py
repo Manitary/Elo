@@ -33,6 +33,7 @@ class Elo:
         return self._rating
 
     # Backward compatibility
+    # pylint: disable=invalid-name
     def addPlayer(self, name: Hashable, rating: float = 1500) -> None:
         return self.add_player(name, rating)
 
