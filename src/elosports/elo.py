@@ -32,7 +32,16 @@ class Elo:
     def rating(self) -> dict[Hashable, float]:
         return self._rating
 
+    # Backward compatibility
+    def addPlayer(self, name: Hashable, rating: float = 1500) -> None:
+        return self.add_player(name, rating)
 
-test = Elo(k=20)
-test.add_player("Daniel", rating=1600)
-test.add_player("Mike")
+    def gameOver(self, winner: Hashable, loser: Hashable, winnerHome: bool) -> None:
+        return self.game_over(winner, loser, winnerHome)
+
+    def expectResult(self, p1: float, p2: float) -> float:
+        return self.expect_result(p1, p2)
+
+    @property
+    def ratingDict(self) -> dict[Hashable, float]:
+        return self._rating
