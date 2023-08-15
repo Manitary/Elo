@@ -15,8 +15,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 
-[tool.setuptools]
-package-dir = { "" = "src" }
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"elosports" = ["py.typed"]
 
 [project.urls]
 "Homepage" = "https://github.com/Manitary/Elo"
