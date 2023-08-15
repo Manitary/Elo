@@ -1,5 +1,5 @@
 # Elo Python Ranking
-The elo formula is a method of ranking chess players by calculating relative skill. It has found successful applications in team sports. A python package has been developed to calulate expected probability of victory based on prior skill rankings and update the rankings following a result. 
+The elo formula is a method of ranking chess players by calculating relative skill. It has found successful applications in team sports. A python package has been developed to calculate expected probability of victory based on prior skill rankings and update the rankings following a result. 
 
 ```python
 from elosports.elo import Elo
