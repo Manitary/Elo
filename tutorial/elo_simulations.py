@@ -8,21 +8,21 @@ allTeams = set(from2000.team1.tolist())
 eloLeague = Elo(k=20)
 
 for team in allTeams:
-    eloLeague.addPlayer(team)
+    eloLeague.add_player(team)
 
 currSeason = 2000
 for game in from2000.iterrows():
     if game[1].season > currSeason:
-        for key in eloLeague.ratingDict.keys():
-            eloLeague.ratingDict[key] = eloLeague.ratingDict[key] - (
-                (eloLeague.ratingDict[key] - 1500) * (1 / 3.0)
+        for key in eloLeague.rating.keys():
+            eloLeague.rating[key] = eloLeague.rating[key] - (
+                (eloLeague.rating[key] - 1500) * (1 / 3.0)
             )
         currSeason += 1
 
     if game[1].score1 > game[1].score2:
-        eloLeague.gameOver(game[1].team1, game[1].team2, True)
+        eloLeague.game_over(game[1].team1, game[1].team2, True)
     else:
-        eloLeague.gameOver(game[1].team2, game[1].team1, 0)
+        eloLeague.game_over(game[1].team2, game[1].team1, 0)
 
 expected = {
     "CLE": 1293.272678922271,
@@ -59,4 +59,4 @@ expected = {
     "BUF": 1505.7919696660754,
 }
 
-print(eloLeague.ratingDict == expected)
+print(eloLeague.rating == expected)

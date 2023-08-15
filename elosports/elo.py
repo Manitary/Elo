@@ -1,35 +1,38 @@
+from typing import Hashable
+
+
 class Elo:
-    def __init__(self, k, g=1, homefield=100):
-        self.ratingDict = {}
-        self.k = k
-        self.g = g
-        self.homefield = homefield
+    def __init__(self, k: int, g: int = 1, home_field: int = 100) -> None:
+        self._rating: dict[Hashable, float] = {}
+        self._k = k
+        self._g = g
+        self._home_field = home_field
 
-    def addPlayer(self, name, rating=1500):
-        self.ratingDict[name] = rating
+    def add_player(self, name: Hashable, rating: float = 1500) -> None:
+        self._rating[name] = rating
 
-    def gameOver(self, winner, loser, winnerHome):
-        if winnerHome:
-            result = self.expectResult(
-                self.ratingDict[winner] + self.homefield, self.ratingDict[loser]
+    def game_over(self, winner: Hashable, loser: Hashable, winner_home: bool) -> None:
+        if winner_home:
+            result = self.expect_result(
+                self._rating[winner] + self._home_field, self._rating[loser]
             )
         else:
-            result = self.expectResult(
-                self.ratingDict[winner], self.ratingDict[loser] + self.homefield
+            result = self.expect_result(
+                self._rating[winner], self._rating[loser] + self._home_field
             )
 
-        self.ratingDict[winner] = self.ratingDict[winner] + (self.k * self.g) * (
-            1 - result
-        )
-        self.ratingDict[loser] = self.ratingDict[loser] + (self.k * self.g) * (
-            0 - (1 - result)
-        )
+        self._rating[winner] += self._k * self._g * (1 - result)
+        self._rating[loser] += self._k * self._g * (result - 1)
 
-    def expectResult(self, p1, p2):
+    def expect_result(self, p1: float, p2: float) -> float:
         exp = (p2 - p1) / 400.0
         return 1 / ((10.0 ** (exp)) + 1)
 
+    @property
+    def rating(self) -> dict[Hashable, float]:
+        return self._rating
+
 
 test = Elo(k=20)
-test.addPlayer("Daniel", rating=1600)
-test.addPlayer("Mike")
+test.add_player("Daniel", rating=1600)
+test.add_player("Mike")
